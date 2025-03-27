@@ -18,7 +18,7 @@ program Registros;
  end;
  procedure leer(var alu : alumno);
  begin
-	writeln('Ingrese el código del alumno');
+	writeln('Ingrese el codigo del alumno');
 	readln(alu.codigo);
 	if (alu.codigo <> 0) then
 		begin
@@ -28,18 +28,31 @@ program Registros;
 			readln(alu.promedio);
 		end;
  end;
+ procedure mayProm(prom:real;nom:str20;var promM:real;var nombreM:str20);
+ begin
+	if(prom >= promM)then
+		begin
+			promM:=prom;
+			nombreM:=nom;
+		end;
+ end;
  { declaración de variables del programa principal }
  var
  a : alumno;
  cantLeidos:integer;
+ nombreMay:str20;
+ promMay:real;
  { cuerpo del programa principal }
  begin
+	promMay:=-1;
 	cantLeidos:=0;
 	leer(a);
 	while(a.codigo<>0)do
 		begin
 			cantLeidos:=cantLeidos+1;
+			mayProm(a.promedio,a.nombre,promMay,nombreMay);
 			leer(a);
 		end;
 	writeln('La cantidad de Alumnos leida es : ',cantLeidos);
+	writeln('El Alumno con mejor promedio es: ',nombreMay,' con un promedio : ',promMay:2:2);
  end.
